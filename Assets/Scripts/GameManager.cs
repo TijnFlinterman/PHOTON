@@ -6,8 +6,8 @@ namespace NEW.NAMESPACE.COM
     {
         /// <summary>
         /// Called when the local player left the room. We need to load the launcher scene.
-    /// </summary>
- public override void OnLeftRoom()
+        /// </summary>
+        public override void OnLeftRoom()
         {
             SceneManager.LoadScene(0);
         }
@@ -15,5 +15,38 @@ namespace NEW.NAMESPACE.COM
         {
             PhotonNetwork.LeaveRoom();
         }
+
+        private void LoadArena()
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                
+            }
+            
+            PhotonNetwork.LoadLevel("Room for " +
+           PhotonNetwork.CurrentRoom.PlayerCount);
+        }
+
+        public override void OnPlayerEnteredRoom(Player other)
+        {
+            
+ if (PhotonNetwork.IsMasterClient)
+            {
+              
+              
+                LoadArena();
+            }
+        }
+        public override void OnPlayerLeftRoom(Player other)
+        {
+           
+         if (PhotonNetwork.IsMasterClient)
+            {
+              
+             
+                LoadArena();
+            }
+        }
+
     }
 }
