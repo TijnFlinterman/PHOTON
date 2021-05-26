@@ -29,7 +29,8 @@ namespace NEW.NAME.SPACE
  /// </summary>
  private void Start()
  {
- Connect();
+            progressLabel.SetActive(false);
+            controlPanel.SetActive(true);
  }
  /// <summary>
  /// Start the connection process.
@@ -37,8 +38,10 @@ namespace NEW.NAME.SPACE
  /// - if not yet connected, Connect this application instance to Photon Cloud Network /// </summary>
  public void Connect()
  {
- // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
- if (PhotonNetwork.IsConnected)
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
+            // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
+            if (PhotonNetwork.IsConnected)
  {
  // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
  PhotonNetwork.JoinRandomRoom();
@@ -70,5 +73,11 @@ namespace NEW.NAME.SPACE
  {
  Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
  }
- }
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        [SerializeField]
+        private GameObject controlPanel;
+        [Tooltip("The UI Label to inform the user that the connection is in progress")]
+        [SerializeField]
+        private GameObject progressLabel;
+    }
 }
